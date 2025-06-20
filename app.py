@@ -1,9 +1,10 @@
-# app.py ver. 1.0.1
+# app.py ver. 1.0.2
+"""Demuestra la probabilidad del resultado de tirar una moneda"""
 
+import time
 import pandas as pd
 import scipy.stats
 import streamlit as st
-import time
 
 # estas son variables de estado que se conservan cuando Streamlin vuelve a ejecutar este script
 if 'experiment_no' not in st.session_state:
@@ -17,7 +18,7 @@ st.header('Lanzar una moneda')
 chart = st.line_chart([0.5])
 
 def toss_coin(n):
-
+    """Tira una moneda y grafica la media del número de intentos."""
     trial_outcomes = scipy.stats.bernoulli.rvs(p=0.5, size=n)
 
     mean = None
