@@ -1,17 +1,17 @@
-# app.py ver. 1
+# app.py ver. 1.0.1
 
+import pandas as pd
 import scipy.stats
 import streamlit as st
 import time
-import pandas as pd
 
-# estas son variables de estado que se conservan cuando Streamlit vuelve a ejecutar este script
+# estas son variables de estado que se conservan cuando Streamlin vuelve a ejecutar este script
 if 'experiment_no' not in st.session_state:
     st.session_state['experiment_no'] = 0
-    
+
 if 'df_experiment_results' not in st.session_state:
     st.session_state['df_experiment_results'] = pd.DataFrame(columns=['no', 'iteraciones', 'media'])
-    
+
 st.header('Lanzar una moneda')
 
 chart = st.line_chart([0.5])
@@ -44,11 +44,11 @@ if start_button:
     st.session_state['df_experiment_results'] = pd.concat([
         st.session_state['df_experiment_results'],
         pd.DataFrame(data=[[st.session_state['experiment_no'],
-                        number_of_trials,
-                        mean]],
-                columns=['no', 'iteraciones', 'media'])
-    ],
-    axis=0)
-    st.session_state['df_experiment_results'] = session_state['df_experiment_results'].reset_index(drop=True)
-    
+                            number_of_trials,
+                            mean]],
+                     columns=['no', 'iteraciones', 'media'])
+        ],
+        axis=0)
+    st.session_state['df_experiment_results'] = st.session_state['df_experiment_results'].reset_index(drop=True)
+
 st.write(st.session_state['df_experiment_results'])
